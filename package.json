@@ -8,5 +8,8 @@
     "test": "make test"
   },
   "author": "fundon <cfddream@gmail.com>",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^0.5.1"
+  }
 }
