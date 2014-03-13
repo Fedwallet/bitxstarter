@@ -8,8 +8,19 @@
     "test": "make test"
   },
   "author": "fundon <cfddream@gmail.com>",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "koa": "^0.5.1"
+    "koa": "^0.5.1",
+    "koa-logger": "^1.2.0",
+    "koa-redis": "^0.1.0",
+    "koa-sess": "^0.1.0",
+    "koa-rt": "0.0.2",
+    "microtime": "^0.5.1",
+    "koa-static-cache": "^1.0.6",
+    "koa-bodyparser": "^0.1.0",
+    "koa-router": "^3.1.1"
+  },
+  "devDependencies": {
+    "istanbul": "^0.2.6"
   }
 }
