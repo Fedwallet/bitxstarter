@@ -26,7 +26,15 @@ var config = Object.freeze({
 
   postgre       : postgre,
   session       : session,
-  sessionSecret : 'bitstart test session secret'
+  sessionSecret : 'bitappstore test session secret',
+
+  // https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet
+  pbkdf2    : {
+    keylen    : 64,
+    saltlen   : 32,
+    algorithm : 'sha256',
+    iterations: isProd ? 6400 : 10
+  }
 });
 
 module.exports = config;

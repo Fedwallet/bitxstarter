@@ -22,7 +22,9 @@
     "lazy.js": "^0.3.2",
     "sequelize": "^1.7.0",
     "pg": "^2.11.1",
-    "slug": "^0.4.2"
+    "slug": "^0.4.2",
+    "pbkdf2": "0.0.3",
+    "debug": "^0.7.4"
   },
   "devDependencies": {
     "istanbul": "^0.2.6"
