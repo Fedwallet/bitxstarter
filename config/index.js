@@ -1,4 +1,5 @@
 'use strict';
+
 /**
  *  Module dependencies.
  */
@@ -21,7 +22,11 @@ var config = Object.freeze({
   debug         : true,
   isProduction  : isProd,
   isDevelopment : !isProd,
-  port          : env.PORT || 3000
+  port          : env.PORT || 3000,
+
+  postgre       : postgre,
+  session       : session,
+  sessionSecret : 'bitstart test session secret'
 });
 
 module.exports = config;

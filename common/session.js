@@ -4,7 +4,7 @@ var session     = require('koa-sess');
 var RedisStore  = require('koa-redis');
 var config      = require('../config');
 
-var key = 'bit-sid';
+var key = 'bit_sid';
 var cookie = {
   path: '/',
   httpOnly: true,
@@ -14,10 +14,11 @@ var cookie = {
 var options = {
   key: key,
   cookie: cookie,
+  secret: config.sessionSecret
 };
 
 if (!config.debug) {
-  options.store = config.sessionStore || middlewares.RedisStore(config.redis);
+  options.store = config.sessionStore || middlewares.RedisStore(config.session);
 }
 
 module.exports = session(options);

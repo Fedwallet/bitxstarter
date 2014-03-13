@@ -4,6 +4,7 @@
  *  Module dependencies.
  */
 
+var http        = require('http');
 var path        = require('path');
 var koa         = require('koa');
 var logger      = require('koa-logger');
@@ -19,6 +20,7 @@ var routes      = require('../routes/web');
 var app     = koa();
 
 var config  = require('../config')
+var db      = require('../models')();
 
 var rootdir = path.dirname(__dirname);
 
@@ -48,5 +50,16 @@ app = http.createServer(app.callback());
 if (!module.parent) {
   app.listen(config.port);
 }
+
+db
+  .sequelize
+  .sync({ force: false })
+  .complete(function(err) {
+    if (err) {
+      throw err
+    } else {
+      console.log('Postgres connected.');
+    }
+  });
 
 module.exports = app;
