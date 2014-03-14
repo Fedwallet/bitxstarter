@@ -1,7 +1,7 @@
-TESTS = $(shell ls -S `find test -type f -name "*.test.js" -print`)
+TESTS = $(shell find test -type f -name "*.test.js" | sort)
 REPORTER = tap
 TIMEOUT = 30000
-MOCHA_OPTS =
+MOCHA_OPTS = --check-leaks
 
 node_modules:
 	@npm install
