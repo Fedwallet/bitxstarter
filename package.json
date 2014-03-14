@@ -27,6 +27,10 @@
     "debug": "^0.7.4"
   },
   "devDependencies": {
-    "istanbul": "^0.2.6"
+    "istanbul": "^0.2.6",
+    "jshint": "^2.4.4"
+  },
+  "engines": {
+    "node": ">= 0.11.12"
   }
 }
