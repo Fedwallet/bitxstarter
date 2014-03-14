@@ -19,11 +19,12 @@ var routes      = require('../routes/web');
 
 var app     = koa();
 
-var config  = require('../config')
+var config  = require('../config');
 var db      = require('../models')();
 
 var rootdir = path.dirname(__dirname);
 
+app.use(logger());
 app.use(xrt({timer: microtime}));
 app.use(staticCache(path.join(__dirname, '..', 'public'), {
   buffer: !config.debug,
@@ -56,7 +57,7 @@ db
   .sync({ force: false })
   .complete(function(err) {
     if (err) {
-      throw err
+      throw err;
     } else {
       console.log('Postgres connected.');
     }

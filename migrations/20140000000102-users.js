@@ -1,3 +1,4 @@
+'use strict';
 
 module.exports = {
   up: function(migration, DataTypes, done) {
@@ -24,7 +25,7 @@ module.exports = {
           .save()
           .complete(function (err, c) {
             console.log(err ? 'Failure' : 'Success');
-            done();
+            done(c);
           });
         })
         .error(function (err) {
@@ -38,4 +39,4 @@ module.exports = {
   down: function(migration, DataTypes, done) {
     migration.dropTable('users').complete(done);
   }
-}
+};

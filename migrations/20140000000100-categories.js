@@ -1,3 +1,4 @@
+'use strict';
 
 module.exports = {
   up: function(migration, DataTypes, done) {
@@ -14,7 +15,7 @@ module.exports = {
         Category
           .sync( { force: true } )
           .success(function () {
-            var chainer = new Sequelize.Utils.QueryChainer;
+            var chainer = new Sequelize.Utils.QueryChainer();
             cates.forEach(function (v) {
               var c = Category.build(v);
               chainer.add(c.saveNew());
@@ -23,14 +24,14 @@ module.exports = {
               .run()
               .complete(function (err, cates) {
                 console.log(err ? 'Failure' : 'Success');
-                done();
+                done(cates);
               });
           });
 
       })
       .error(function (err) {
         console.log('Error', err);
-        next();
+        done();
       });
 
   },
@@ -38,4 +39,4 @@ module.exports = {
   down: function(migration, DataTypes, done) {
     migration.dropTable('categories').complete(done);
   }
-}
+};

@@ -1,3 +1,5 @@
+'use strict';
+
 /**
  *  == Schema Information
  *
@@ -32,10 +34,10 @@
 var pbkdf2      = require('pbkdf2');
 var pbkdf2Conf  = require('../config').pbkdf2;
 
-var SALTLEN     = pbkdf2.saltlen;
-var ITERATIONS  = pbkdf2.iterations;
-var KEYLEN      = pbkdf2.keylen;
-var ALGORITHM   = pbkdf2.algorithm;
+var SALTLEN     = pbkdf2Conf.saltlen    || pbkdf2.saltlen;
+var KEYLEN      = pbkdf2Conf.keylen     || pbkdf2.keylen;
+var ALGORITHM   = pbkdf2Conf.algorithm  || pbkdf2.algorithm;
+var ITERATIONS  = pbkdf2Conf.iterations || pbkdf2.iterations;
 
 module.exports = function (sequelize, DataTypes) {
 

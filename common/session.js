@@ -18,7 +18,7 @@ var options = {
 };
 
 if (!config.debug) {
-  options.store = config.sessionStore || middlewares.RedisStore(config.session);
+  options.store = config.sessionStore || RedisStore(config.session);
 }
 
 module.exports = session(options);

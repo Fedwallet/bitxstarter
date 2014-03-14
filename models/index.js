@@ -1,3 +1,5 @@
+'use strict';
+
 var fs        = require('fs');
 var path      = require('path');
 var Lazy      = require('lazy.js');
@@ -38,12 +40,12 @@ module.exports = function (sequelize) {
       }
     });
 
-    Object.keys(db).forEach(function(name) {
-      var m = db[name];
-      if (m.options.hasOwnProperty('associate')) {
-        m.options.associate(db)
-      }
-    });
+  Object.keys(db).forEach(function(name) {
+    var m = db[name];
+    if (m.options.hasOwnProperty('associate')) {
+      m.options.associate(db);
+    }
+  });
 
   // ---------------
   //var User      = db.User;
@@ -66,8 +68,8 @@ module.exports = function (sequelize) {
   //Project.hasOne(Category,  { as: 'category', foreignKey: 'category_id'  });
   // ------------------
 
-  return Seq = Lazy({
+  return (Seq = Lazy({
     sequelize: sequelize,
     Sequelize: Sequelize
-  }).extend(db).toObject();
+  }).extend(db).toObject());
 };

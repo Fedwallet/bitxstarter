@@ -1,3 +1,4 @@
+'use strict';
 
 module.exports = {
   up: function(migration, DataTypes, done) {
@@ -15,7 +16,7 @@ module.exports = {
         Currency
           .sync( { force: true } )
           .success(function () {
-            var chainer = new Sequelize.Utils.QueryChainer;
+            var chainer = new Sequelize.Utils.QueryChainer();
             currencies.forEach(function (v) {
               var c = Currency.build(v);
               chainer.add(c.save());
@@ -24,7 +25,7 @@ module.exports = {
               .run()
               .complete(function (err, c) {
                 console.log(err ? 'Failure' : 'Success');
-                done();
+                done(c);
               });
           });
 
@@ -39,4 +40,4 @@ module.exports = {
   down: function(migration, DataTypes, done) {
     migration.dropTable('currencies').complete(done);
   }
-}
+};
