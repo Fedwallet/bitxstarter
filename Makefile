@@ -28,4 +28,11 @@ test-cov:
 		$(TESTS)
 	@-$(MAKE) check-coverage
 
+check-coverage:
+	@./node_modules/.bin/istanbul check-coverage \
+		--statements 100 \
+		--functions 100 \
+		--branches 100 \
+		--lines 100
+
 .PHONY: test jshint
