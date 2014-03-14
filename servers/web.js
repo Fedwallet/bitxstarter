@@ -13,6 +13,7 @@ var bodyParser  = require('koa-bodyparser');
 var router      = require('koa-router');
 var microtime   = require('microtime');
 var xrt         = require('koa-rt');  // X-Response-Time
+var render      = require('koa-swig');
 var session     = require('../common/session');
 var notFound    = require('../middleware/notfound');
 var routes      = require('../routes/web');
@@ -38,6 +39,15 @@ app.proxy = true;
 app.use(session);
 app.use(bodyParser());
 app.use(notFound);
+
+var viewsdir = path.join(rootdir, 'views');
+
+render(app, {
+  cache: false,
+  views: viewsdir,
+  ext: 'html',
+  locals: {}
+});
 
 /**
  *  Routes

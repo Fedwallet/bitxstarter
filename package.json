@@ -15,16 +15,19 @@
     "koa-redis": "^0.1.0",
     "koa-sess": "^0.1.0",
     "koa-rt": "0.0.2",
-    "microtime": "^0.5.1",
+    "koa-swig": "0.0.2",
     "koa-static-cache": "^1.0.6",
     "koa-bodyparser": "^0.1.0",
     "koa-router": "^3.1.1",
+    "microtime": "^0.5.1",
     "lazy.js": "^0.3.2",
     "sequelize": "^1.7.0",
     "pg": "^2.11.1",
     "slug": "^0.4.2",
     "pbkdf2": "0.0.3",
-    "debug": "^0.7.4"
+    "debug": "^0.7.4",
+    "mime": "^1.2.11",
+    "supertest": "^0.9.0"
   },
   "devDependencies": {
     "istanbul": "^0.2.6",
