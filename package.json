@@ -13,7 +13,7 @@
     "koa": "^0.5.1",
     "koa-logger": "^1.2.0",
     "koa-redis": "^0.1.0",
-    "koa-sess": "^0.1.0",
+    "koa-sess": "^0.3.0",
     "koa-rt": "0.0.2",
     "koa-static-cache": "^1.0.6",
     "koa-bodyparser": "^0.1.0",
@@ -28,7 +28,7 @@
     "mime": "^1.2.11",
     "supertest": "^0.9.0",
     "koa-csrf": "^1.0.1",
-    "koa-swig": "0.0.3"
+    "koa-swig": "0.0.4"
   },
   "devDependencies": {
     "istanbul": "^0.2.6",
