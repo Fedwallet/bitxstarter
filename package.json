@@ -16,7 +16,6 @@
     "koa-sess": "^0.3.0",
     "koa-rt": "0.0.2",
     "koa-static-cache": "^1.0.6",
-    "koa-bodyparser": "^0.1.0",
     "koa-router": "^3.1.1",
     "microtime": "^0.5.1",
     "lazy.js": "^0.3.2",
@@ -30,7 +29,8 @@
     "koa-csrf": "^1.0.1",
     "koa-swig": "0.0.4",
     "koa-favicon": "^1.0.1",
-    "pretty-error": "^0.1.17"
+    "pretty-error": "^0.1.17",
+    "koa-body-parser": "^1.0.0"
   },
   "devDependencies": {
     "istanbul": "^0.2.6",
