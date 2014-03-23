@@ -36,7 +36,7 @@ check-coverage:
 		--lines 100
 
 web:
-	@DEBUG=koa:* node --harmony \
+	@DEBUG=koa:*,bit:* node --harmony \
 		servers/web.js
 
 .PHONY: test jshint web
