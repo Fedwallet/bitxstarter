@@ -26,7 +26,6 @@
     "debug": "^0.7.4",
     "mime": "^1.2.11",
     "supertest": "^0.9.0",
-    "koa-csrf": "^1.0.1",
     "koa-swig": "^0.2.1",
     "koa-favicon": "^1.0.1",
     "pretty-error": "^0.1.17",
@@ -35,7 +34,8 @@
     "koa-locals": "^0.2.0",
     "nodemailer": "^0.6.1",
     "koa-flash": "0.0.2",
-    "koa-cure": "0.0.3"
+    "koa-cure": "0.0.3",
+    "validator": "^3.5.0"
   },
   "devDependencies": {
     "istanbul": "^0.2.6",
