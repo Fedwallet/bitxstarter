@@ -10,7 +10,7 @@
   "author": "fundon <cfddream@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "koa": "^0.5.1",
+    "koa": "^0.5.2",
     "koa-logger": "^1.2.0",
     "koa-redis": "^0.1.0",
     "koa-sess": "^0.3.0",
@@ -35,7 +35,9 @@
     "nodemailer": "^0.6.1",
     "koa-flash": "0.0.2",
     "koa-cure": "0.0.3",
-    "validator": "^3.5.0"
+    "validator": "^3.5.0",
+    "delegates": "0.0.3",
+    "koa-methodoverride": "^0.2.0"
   },
   "devDependencies": {
     "istanbul": "^0.2.6",
