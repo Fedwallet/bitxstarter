@@ -1,0 +1,107 @@
+<!Doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="_csrf" content="{{ _csrf }}">
+    {% block head %}
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/foundation.css">
+    <!-- JavaScript -->
+    <script src="js/vendor/modernizr.js"></script>
+    {% endblock %}
+  </head>
+  <body>
+    <header role="banner">
+      <div class="row">
+        <nav class="top-bar" role="navigation" data-topbar>
+          <ul class="title-area">
+            <li class="name">
+              <h1><a href="/">{{ site.name }}</a></h1>
+            </li>
+          </ul>
+          <section class="top-bar-section">
+            {% if loggedIn %}
+            <ul class="right">
+              <li class="has-dropdown">
+                <a href="/@{{ currentUser.username }}">{{ currentUser.username }}</a>
+                <ul class="dropdown">
+                  <li><a href="/settings">Account Settings</a></li>
+                  <li><a href="/logout" data-method="delete">Sign out</a></li>
+                </ul>
+              </li>
+            </ul>
+            {% else %}
+            <ul class="button-group">
+              <li><a class="button" href="/signup">Sign up</a></li>
+              <li><a class="button" href="/login">Sign in</a></li>
+            </ul>
+            {% endif %}
+            <ul class="left">
+              <li><a href="/discover">Discover</a></li>
+            </ul>
+          </section>
+        </nav>
+      </div>
+    </header>
+
+    <main class="row" role="main">
+    {% block content %}{{ content }}{% endblock %}
+    </main>
+
+    <footer class="row" role="contentinfo"></footer>
+
+    <script src="js/vendor/jquery.js"></script>
+    <!--
+    <script src="js/vendor/zepto.js"></script>
+    -->
+    <script src="js/foundation.min.js"></script>
+    <script>
+      $(document).foundation();
+      /*
+      $(document).on("ajaxBeforeSend", function(t, e, n) {
+        var r;
+        if (!n.crossDomain && "GET" !== n.type) {
+          return (r = $('meta[name="_csrf"]').attr("content")) ? e.setRequestHeader("X-CSRF-Token", r) : void 0
+        }
+      });
+      var t = function(t) {
+        var e, n;
+        return e = document.createElement("a"), e.href = t, n = e.href.split("/", 3).join("/"), 0 === location.href.indexOf(n);
+      };
+      */
+      $(document).on('click', 'a[data-method]', function(e) {
+        var n = $(this);
+        var isRemote = n.is('a[data-remote]');
+        var m = n.attr('data-method').toLowerCase();
+        if (m === 'get') {
+          return void 0;
+        }
+        var f = document.createElement('form');
+        f.method = 'POST';
+        f.action = n.attr('href');
+        f.style.display = 'none';
+        if ('post' !== m) {
+          var r = document.createElement('input');
+          r.setAttribute('type', 'hidden');
+          r.setAttribute('name', '_method');
+          r.setAttribute('value', m.toUpperCase());
+          f.appendChild(r);
+        }
+        var csrf = $('meta[name="_csrf"]');
+        if (csrf) {
+          var r = document.createElement('input');
+          r.setAttribute('type', 'hidden');
+          r.setAttribute('name', '_csrf');
+          r.setAttribute('value', csrf.attr('content'));
+          f.appendChild(r);
+        }
+        document.body.appendChild(f);
+        $(f).submit();
+        e.preventDefault();
+        return false;
+      });
+    </script>
+  </body>
+</html>
