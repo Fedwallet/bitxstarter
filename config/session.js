@@ -12,5 +12,5 @@ module.exports = {
 
   production: Lazy(_default).merge({
     port: 6379
-  })
+  }).toObject()
 };
