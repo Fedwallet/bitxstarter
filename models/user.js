@@ -125,26 +125,30 @@ module.exports = function (sequelize, DataTypes) {
         });
       },
 
-      getUserByUserNameOrEmail: function (query, callback) {
-        query = query.length === 1 ? query[0] : sequelize.or(query[0], query[1]);
-        User.find({
-          where: query,
-          attributes: ['id', 'username', 'email', 'name', 'bio', 'website', ['to_char("created_at", \'YYYY-MM-DD"T"HH24:MI:SS"Z"\')', 'created_at'], 'password_hash', 'salt']
-        }).complete(function (err, u) {
-          callback(err, u);
-        });
+      getUserByUserNameOrEmail: function (query) {
+        return function (done) {
+          var q = query;
+          var keys = Object.keys(query);
+          if (keys.length > 1) {
+            q = sequelize.or({ email: query.email }, { username: query.username });
+          }
+          User.find({
+            where: q,
+            attributes: ['id', 'username', 'email', 'name', 'bio', 'website', ['to_char("created_at", \'YYYY-MM-DD"T"HH24:MI:SS"Z"\')', 'created_at'], 'password_hash', 'salt']
+          }).complete(done);
+        };
       },
 
-      saveNew: function (username, email, password, callback) {
-        User.build({
-          username: username,
-          email:  email
-        })
-        .hashPassword(password)
-        .save()
-        .complete(function (err, u) {
-          callback(err, u);
-        });
+      saveNew: function (username, email, password) {
+        return function (done) {
+          User.build({
+            username: username,
+            email:  email
+          })
+          .hashPassword(password)
+          .save()
+          .complete(done);
+        };
       }
 
     },
