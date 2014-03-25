@@ -1,0 +1,45 @@
+{% extends '../layouts/base.html' %}
+
+{% block title %}Signup · {{ site.name }}{% endblock %}
+
+{% block content %}
+
+<h2>Sign up</h2>
+
+{% if flash %}
+{% for flashKey, flashValue in flash %}
+<div data-alert class="alert-box {{ flashKey }}">
+  {{ flashValue }}
+  <a href="#" class="close">&times;</a>
+</div>
+{% endfor %}
+{% endif %}
+
+{% if not user %}
+<form accept-charset="UTF-8" method="post" action="/signup" autocomplete="off" data-abide id="signup-form">
+  <div class="hide">
+    <input type="hidden" name="_csrf" value="{{ _csrf }}">
+  </div>
+  <div class="name-field">
+    <label>Username <small>required</small>
+      <input type="text" required pattern="^[a-zA-Z0-9][a-zA-Z0-9-]{0,38}$" maxlength="39" autocapitalize="off" autofocus="true" placeholder="satoshi" name="username" value="{{ username }}">
+    </label>
+    <small class="error">Username is required and must be a string.</small>
+  </div>
+  <div class="email-field">
+    <label>Email <small>required</small>
+      <input type="email" required pattern"^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,6}$" autocapitalize="off" placeholder="love@bitcoin.org" name="email" value="{{ email }}">
+    </label>
+    <small class="error">An email address is required.</small>
+  </div>
+  <div class="password-field">
+    <label>Password <small>required</small>
+      <input type="password" id="password" required pattern=".{8,}" autocomplete="off" name="password">
+    </label>
+    <small class="error">Your password must match the requirements</small>
+  </div>
+  <button type="submit">Create an account</button>
+</form>
+{% endif %}
+
+{% endblock %}
