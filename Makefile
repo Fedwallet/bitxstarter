@@ -9,6 +9,9 @@ node_modules:
 jshint:
 	@-./node_modules/.bin/jshint ./
 
+eslint:
+	@-./node_modules/.bin/eslint ./controllers
+
 test:
 	@NODE_ENV=test ./node_modules/mocha/bin/mocha \
 		--harmony-generators \
@@ -39,4 +42,4 @@ web:
 	@DEBUG=koa:*,bit:* node --harmony \
 		servers/web.js
 
-.PHONY: test jshint web
+.PHONY: test jshint eslint web
