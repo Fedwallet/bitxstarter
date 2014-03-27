@@ -1,5 +1,5 @@
-PostgreSQL
-==========
+# PostgreSQL
+
 
 ## Init
 
@@ -39,6 +39,14 @@ dbname=> SET TIME ZONE UTC;
 ### SQL Operations
 
 ```sql
+
+-- Enforce UTC
+-- https://github.com/bountysource/www.gittip.com/blob/master/enforce-utc.sql
+DO $$
+BEGIN
+EXECUTE '
+ALTER DATABASE "' || current_database() || '" SET timezone TO ''UTC'' ';
+END; $$;
 
 -- Show current database
 SELECT current_database();
