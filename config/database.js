@@ -1,4 +1,4 @@
-var Lazy = require('lazy.js');
+var lazy = require('lazy.js');
 
 var _default = {
   database  : 'bitappstore_dev',
@@ -25,11 +25,11 @@ var _default = {
 module.exports = {
   development: _default,
 
-  test: Lazy(_default).merge({
+  test: lazy(_default).merge({
     database: 'bitappstore_test'
   }).toObject(),
 
-  production: Lazy(_default).merge({
+  production: lazy(_default).merge({
     database: 'bitappstore_prod'
   }).toObject()
 };

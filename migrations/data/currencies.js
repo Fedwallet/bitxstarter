@@ -1,3 +1,5 @@
+/* jshint quotmark:false */
+
 module.exports = [
   {
     "name": "US Dollar",

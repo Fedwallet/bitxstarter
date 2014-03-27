@@ -1,5 +1,7 @@
 # SNS Knowledge
 
+* http://html5pattern.com/Names
+
 ### Bitappstore
 
 * username pattern:
@@ -13,7 +15,7 @@
 * username pattern:
   - 不支持下划线
   - 不能以中横线开头，可以结尾
-  - ^[a-zA-Z0-9][a-zA-Z0-9-]{0,38}
+  - ^[a-zA-Z0-9][a-z0-9-]{0,38}
   - maxleng: 39
 
 ### Twitter

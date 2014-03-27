@@ -2,7 +2,7 @@
 
 var fs        = require('fs');
 var path      = require('path');
-var Lazy      = require('lazy.js');
+var lazy      = require('lazy.js');
 var Sequelize = require('sequelize');
 var Seq       = null;
 
@@ -32,7 +32,7 @@ module.exports = function (sequelize) {
       var p = path.join(__dirname, file);
       var model = sequelize.import(p);
       if (fs.lstatSync(p).isDirectory()) {
-        Lazy(model).each(function (m) {
+        lazy(model).each(function (m) {
           db[m.name] = m;
         });
       } else {
@@ -68,7 +68,7 @@ module.exports = function (sequelize) {
   //Project.hasOne(Category,  { as: 'category', foreignKey: 'category_id'  });
   // ------------------
 
-  return (Seq = Lazy({
+  return (Seq = lazy({
     sequelize: sequelize,
     Sequelize: Sequelize
   }).extend(db).toObject());

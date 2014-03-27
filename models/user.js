@@ -1,3 +1,5 @@
+/* jshint camelcase:false */
+
 'use strict';
 
 /**
@@ -135,7 +137,8 @@ module.exports = function (sequelize, DataTypes) {
           User.find({
             where: q,
             attributes: ['id', 'username', 'email', 'name', 'bio', 'website', ['to_char("created_at", \'YYYY-MM-DD"T"HH24:MI:SS"Z"\')', 'created_at'], 'password_hash', 'salt']
-          }).complete(done);
+          })
+          .complete(done);
         };
       },
 

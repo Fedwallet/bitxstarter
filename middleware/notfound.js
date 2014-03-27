@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function *notFound(next) {
-  yield *next;
+  yield next;
 
   if (this.status) { return; }
 

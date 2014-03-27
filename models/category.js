@@ -1,3 +1,5 @@
+/* jshint camelcase:false */
+
 'use strict';
 
 /**
@@ -43,30 +45,30 @@ module.exports = function (sequelize, DataTypes) {
 
     classMethods: {
 
-      getTops: function (callback) {
-        Category
-          .findAll({
-            where: {
-              parent_id: null
-            },
-            order: [
-              ['created_at', 'ASC'],
-              ['position', 'DESC']
-            ],
-            attributes: ['id', 'name', 'slug', 'position']
-          })
-          .complete(function (err, cates) {
-            callback(err, cates);
-          });
+      getTops: function () {
+        return function (done) {
+          Category
+            .findAll({
+              where: {
+                parent_id: null
+              },
+              order: [
+                ['created_at', 'ASC'],
+                ['position', 'DESC']
+              ],
+              attributes: ['id', 'name', 'slug', 'position']
+            })
+            .complete(done);
+        };
       },
 
-      getTree: function (callback) {
-        sequelize
-          .query(
-"WITH RECURSIVE tree (id, name, parent_id, level, path) AS (SELECT c.id, c.name, c.parent_id, 1, ARRAY[c.id] FROM categories AS c WHERE parent_id IS NULL UNION ALL SELECT c.id, c.name, c.parent_id, t.level + 1, t.path || c.id FROM categories AS c JOIN tree AS t ON c.parent_id = t.id) SELECT id, name, parent_id, level, array_to_string(path, '-') AS path FROM tree ORDER BY path;", null, { raw: true })
-          .complete(function (err, cates) {
-            callback(err, cates);
-          });
+      getTree: function () {
+        return function (done) {
+          sequelize
+            .query(
+'WITH RECURSIVE tree (id, name, parent_id, level, path) AS (SELECT c.id, c.name, c.parent_id, 1, ARRAY[c.id] FROM categories AS c WHERE parent_id IS NULL UNION ALL SELECT c.id, c.name, c.parent_id, t.level + 1, t.path || c.id FROM categories AS c JOIN tree AS t ON c.parent_id = t.id) SELECT id, name, parent_id, level, array_to_string(path, "-") AS path FROM tree ORDER BY path;', null, { raw: true })
+            .complete(done);
+        };
       }
 
     },

@@ -19,13 +19,13 @@ var User = models.User;
  */
 
 function checkEmail(email) {
-  return validator.isLength(email, 5, 255)
-    && validator.isEmail(email);
+  return validator.isLength(email, 5, 255) &&
+    validator.isEmail(email);
 }
 
 function checkUsername(username) {
-  return validator.isLength(username, 1, 39)
-    &&  validator.matches(username, /^[a-zA-Z0-9][a-zA-Z0-9-]{0,38}$/);
+  return validator.isLength(username, 1, 39) &&
+    validator.matches(username, /^[a-zA-Z0-9][a-zA-Z0-9-]{0,38}$/);
 }
 
 exports['new'] = function *(next) {
@@ -64,9 +64,8 @@ exports.create = function *(next) {
     this.session.user = user.values;
 
     // 如何扩展 `context`?
-    var returnTo = this.session && this.session.returnTo;
-    delete this.session.returnTo;
-    this.redirect(returnTo || '/');
+    /* jshint camelcase:false */
+    this.redirect(decodeURIComponent(body.return_to) || '/');
     this.body = '<html><body>You are being <a href="' + this.location + '">redirected</a>.</body></html>';
   } else {
     this.flash = { error: 'incorrect username or password' };

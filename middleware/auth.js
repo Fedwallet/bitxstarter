@@ -18,5 +18,5 @@ module.exports = function *auth(next) {
     debug('auth exists user: %j, headers: %j', this.user, this.header);
   }
 
-  yield *next;
+  yield next;
 };

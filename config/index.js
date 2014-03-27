@@ -4,7 +4,6 @@
  *  Module dependencies.
  */
 
-var path  = require('path');
 var env   = process.env;
 var pkg   = require('../package');
 
@@ -13,8 +12,6 @@ var isProd    = NODE_ENV === 'production';
 
 var postgre = require('./database')[NODE_ENV];
 var session = require('./session')[NODE_ENV];
-
-var root = path.dirname(__dirname);
 
 var config = Object.freeze({
   env           : NODE_ENV,

@@ -1,4 +1,4 @@
-var Lazy = require('lazy.js');
+var lazy = require('lazy.js');
 
 var _default = {
   host: '127.0.0.1',
@@ -10,7 +10,7 @@ module.exports = {
 
   test: _default,
 
-  production: Lazy(_default).merge({
+  production: lazy(_default).merge({
     port: 6379
   }).toObject()
 };

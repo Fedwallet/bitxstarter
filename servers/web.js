@@ -48,7 +48,10 @@ app.use(middles.cure({
   csrf: true
 }));
 app.use(function *loggedIn(next) {
+  /* jshint camelcase:false */
   this.locals._csrf = this.csrf;
+  var path = this.query.return_to || this.request.path;
+  this.locals.returnTo = (path === '/' || /^\/signin/.test(path) || /^\/signup/.test(path)) ? null : path;
   this.locals.loggedIn = this.session.loggedIn;
   this.locals.currentUser = this.session.user;
   yield next;
@@ -66,7 +69,8 @@ var viewsdir = path.join(rootdir, 'views');
 middles.render(app, {
   cache: false,
   root: viewsdir,
-  ext: 'html'
+  ext: 'html',
+  filters: require('../helpers/swig')
 });
 
 /**
@@ -76,8 +80,9 @@ middles.render(app, {
 app.use(middles.router(app));
 routes(app);
 
+// @todo: storing logs
 app.on('error', function(err, ctx){
-  //log.error('server error', err, ctx);
+  console.log('server error', err, ctx);
 });
 
 app = http.createServer(app.callback());
