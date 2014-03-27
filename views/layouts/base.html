@@ -7,14 +7,15 @@
     <meta name="_csrf" content="{{ _csrf }}">
     {% block head %}
     <!-- CSS -->
-    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="/css/foundation.css">
+    <link rel="stylesheet" href="/css/main.css">
     <!-- JavaScript -->
-    <script src="js/vendor/modernizr.js"></script>
+    <script src="/js/vendor/modernizr.js"></script>
     {% endblock %}
   </head>
   <body>
     <header role="banner">
-      <div class="row">
+      <div class="contain-to-grid">
         <nav class="top-bar" role="navigation" data-topbar>
           <ul class="title-area">
             <li class="name">
@@ -28,18 +29,19 @@
                 <a href="/@{{ currentUser.username }}">{{ currentUser.username }}</a>
                 <ul class="dropdown">
                   <li><a href="/settings">Account Settings</a></li>
-                  <li><a href="/logout" data-method="delete">Sign out</a></li>
+                  <li><a href="{{ |signoutPath }}" data-method="delete">Sign out</a></li>
                 </ul>
               </li>
             </ul>
             {% else %}
-            <ul class="button-group">
-              <li><a class="button" href="/signup">Sign up</a></li>
-              <li><a class="button" href="/login">Sign in</a></li>
+            <ul class="right button-group">
+              <li><a class="button" href="{{ returnTo|signupPath }}">Sign up</a></li>
+              <li><a class="button" href="{{ returnTo|signinPath }}">Sign in</a></li>
             </ul>
             {% endif %}
             <ul class="left">
               <li><a href="/discover">Discover</a></li>
+              <li><a href="/start">Start</a></li>
             </ul>
           </section>
         </nav>
@@ -47,16 +49,18 @@
     </header>
 
     <main class="row" role="main">
-    {% block content %}{{ content }}{% endblock %}
+      <div class="large-12 columns">
+      {% block content %}{{ content }}{% endblock %}
+      </div>
     </main>
 
     <footer class="row" role="contentinfo"></footer>
 
-    <script src="js/vendor/jquery.js"></script>
+    <script src="/js/vendor/jquery.js"></script>
     <!--
     <script src="js/vendor/zepto.js"></script>
     -->
-    <script src="js/foundation.min.js"></script>
+    <script src="/js/foundation.min.js"></script>
     <script>
       $(document).foundation();
       /*

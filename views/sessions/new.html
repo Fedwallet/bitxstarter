@@ -15,9 +15,12 @@
 {% endfor %}
 {% endif %}
 
-<form accept-charset="UTF-8" method="post" action="/login" autocomplete="off" data-abide id="login-form">
+<form accept-charset="UTF-8" method="post" action="/signin" autocomplete="off" data-abide id="login-form">
   <div class="hide">
     <input type="hidden" name="_csrf" value="{{ _csrf }}">
+    {% if returnTo %}
+    <input type="hidden" name="return_to" value="{{ returnTo }}">
+    {% endif %}
   </div>
   <div class="name-field">
     <label>Username or Email <small>required</small>

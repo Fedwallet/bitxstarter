@@ -19,6 +19,9 @@
 <form accept-charset="UTF-8" method="post" action="/signup" autocomplete="off" data-abide id="signup-form">
   <div class="hide">
     <input type="hidden" name="_csrf" value="{{ _csrf }}">
+    {% if returnTo %}
+    <input type="hidden" name="return_to" value="{{ returnTo }}">
+    {% endif %}
   </div>
   <div class="name-field">
     <label>Username <small>required</small>
