@@ -65,7 +65,8 @@ exports.create = function *(next) {
 
     // 如何扩展 `context`?
     /* jshint camelcase:false */
-    this.redirect(decodeURIComponent(body.return_to) || '/');
+    var return_to = body.return_to;
+    this.redirect((return_to && decodeURIComponent(return_to)) || '/');
     this.body = '<html><body>You are being <a href="' + this.location + '">redirected</a>.</body></html>';
   } else {
     this.flash = { error: 'incorrect username or password' };

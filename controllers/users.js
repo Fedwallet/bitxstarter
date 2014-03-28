@@ -32,7 +32,7 @@ function checkPassword(password) {
 }
 
 
-exports['new'] = function *(next) {
+exports.new = function *(next) {
   yield this.render('users/new');
 };
 
@@ -63,6 +63,8 @@ exports.create = function *(next) {
     return;
   }
 
+  // 添加黑名单，在此黑名单中，不得注册
+
   var isAlready = yield User.getUserByUserNameOrEmail(query);
   // 已经被注册了
   if (isAlready) {
@@ -82,11 +84,33 @@ exports.create = function *(next) {
 
       // 如何扩展 `context`?
       /* jshint camelcase:false */
-      this.redirect(decodeURIComponent(body.return_to) || '/');
+      var return_to = body.return_to;
+      this.redirect((return_to && decodeURIComponent(return_to)) || '/');
       this.body = '<html><body>You are being <a href="' + this.location + '">redirected</a>.</body></html>';
     }
   } catch (e) {
     // 403?
     this.throw(403, '注册失败！');
   }
+};
+
+exports.profile = function *(next) {
+  var username = this.params.username;
+
+  if (checkUsername(username)) {
+    var user = yield User.getUserByUserName(username);
+    if (user) {
+      // tabs: backed created activity
+      var tab = this.query.tab || 'backed';
+      var currentUser = this.locals.currentUser;
+
+      yield this.render('users/profile', {
+        tab: tab.toLowerCase(),
+        isCurrentUser: (currentUser && currentUser.id) === user.id,
+        user: user
+      });
+      return;
+    }
+  }
+  this.throw(404);
 };
