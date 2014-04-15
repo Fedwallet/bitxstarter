@@ -1,6 +1,6 @@
-# Bitstarter [Bit App Store](bitappstore.com)
+# BitXstarter.
 
-暂时用bitstarter，还没想到更好的域名(bitstarter.com bitcoinstarter.com 都已被注册）
+暂时用bitxstarter，bitxstarter.com 还没注册
 
 ### Technology Stack
 
