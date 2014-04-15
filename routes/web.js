@@ -43,10 +43,12 @@ function routes(app) {
 
   app.get('/signup', users.new);
   app.post('/signup', users.create);
+  app.get('/@:username', users.profile);
 
   app.get('/discover', projects.index);
   app.get('/start', projects.start);
   app.get('/projects/guidelines', authenticate, projects.new);
+  app.post('/projects/new', projects.create);
 }
 
 module.exports = routes;

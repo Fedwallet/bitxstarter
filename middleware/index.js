@@ -10,7 +10,8 @@ module.exports = {
   render          : require('koa-swig'),
   cure            : require('koa-cure'),
   methodOverride  : require('koa-methodoverride'),
+  flash           : require('koa-flash'),
   auth            : require('./auth'),
-  flash           : require('./flash'),
-  notFound        : require('./notfound')
+  notFound        : require('./notfound'),
+  i18n            : require('koa-i18n')
 };

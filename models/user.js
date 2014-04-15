@@ -33,6 +33,7 @@
  *
  */
 
+var md5         = require('../lib/utils').md5;
 var pbkdf2      = require('pbkdf2');
 var pbkdf2Conf  = require('../config').pbkdf2;
 
@@ -80,6 +81,7 @@ module.exports = function (sequelize, DataTypes) {
 
     avatar_url: { type: DataTypes.STRING(255) },
 
+    // md5(trim(email)), http://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50
     gravatar_id: { type: DataTypes.STRING(255) },
 
     website: { type: DataTypes.STRING(255) },
@@ -118,13 +120,13 @@ module.exports = function (sequelize, DataTypes) {
 
     classMethods: {
 
-      getUserByUserName: function (username, callback) {
-        User.find({
-          where: { username: username },
-          attributes: ['id', 'username', 'email', 'name', 'bio', 'website', ['to_char("created_at", \'YYYY-MM-DD"T"HH24:MI:SS"Z"\')', 'created_at']]
-        }).complete(function (err, u) {
-          callback(err, u);
-        });
+      getUserByUserName: function (username) {
+        return function (done) {
+          User.find({
+            where: { username: username },
+            attributes: ['id', 'username', 'email', 'name', 'bio', 'website', 'avatar_url', 'gravatar_id', ['to_char("created_at", \'YYYY-MM-DD"T"HH24:MI:SS"Z"\')', 'created_at']]
+          }).complete(done);
+        };
       },
 
       getUserByUserNameOrEmail: function (query) {
@@ -145,9 +147,11 @@ module.exports = function (sequelize, DataTypes) {
       saveNew: function (username, email, password) {
         return function (done) {
           User.build({
-            username: username,
-            email:  email
+            username    : username,
+            email       : email,
+            gravatar_id : md5(email)
           })
+          // changes to async
           .hashPassword(password)
           .save()
           .complete(done);

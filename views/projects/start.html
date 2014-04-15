@@ -1,0 +1,22 @@
+{% extends '../layouts/base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="large-3 large-centered columns" style="text-align: center;">
+    <a href="/projects/guidelines" class="button radius">Start a project</a>
+  </div>
+
+  <div class="large-10 large-centered columns">
+    <div class="categories" style="text-align: center;">
+      <h5>Learn more about our project categories:</h5>
+      <ul class="inline-list">
+        {% for category in categories %}
+        <li><a href="{{ category.slug|categoryPath }}" class="button small radius">{{ category.name }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -57,6 +57,10 @@ app.use(function *loggedIn(next) {
   yield next;
 });
 app.use(middles.flash(app));
+app.use(middles.i18n(app, {
+  directory: rootdir + '/config/locales',
+  locales: ['zh-CN', 'en']
+}));
 
 app.use(middles.notFound);
 

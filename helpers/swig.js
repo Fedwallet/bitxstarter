@@ -29,3 +29,9 @@ helpers.signoutPath = function () {
 helpers.categoryPath = function (category) {
   return '/discover/categories/' + category;
 };
+
+helpers.avatarPath = function (input, def, size) {
+  return (input && typeof input !== 'undefined') ?
+    input :
+    'https://www.gravatar.com/avatar/' + def + ('?s=' + (size || 120));
+};

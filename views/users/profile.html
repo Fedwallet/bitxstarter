@@ -1,0 +1,36 @@
+{% extends '../layouts/base.html' %}
+
+{% block content %}
+
+<div class="row">
+  <div class="small-7 small-centered columns hero hero-profile">
+    {% if isCurrentUser %}
+    <a href="#" class="button tiny radius btn-edit">Edit</a>
+    {% endif %}
+
+    <div class="hero-avatar">
+      <img src="{{ user.avatar_url|avatarPath(user.gravatar_id) }}" class="" title="{{ user.username }}" />
+    </div>
+    <h1 class="hero-title">
+      <span class="fullname">{{ user.name|capitalize }}</span>
+      <a class="username" href="/@{{ user.username }}">{{ user.username }}</a>
+    </h1>
+    <p class="hero-description">{{ user.bio }}</p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="small-10 small-centered columns">
+    <dl class="sub-nav">
+      {% set tabs = ['backed', 'created', 'activity'] %}
+      {% for i, t in tabs %}
+      <dd {% if tab == t %}class="active"{% endif %}>
+      <a href="/@{{ user.username }}{% if i %}?tab={{ t }}{% endif %}">{{ t|capitalize }} <span class="{{ t }}-count">{{ user[t + '_count'] }}</span></a>
+      </dd>
+      {% endfor %}
+    </dl>
+
+  </div>
+</div>
+
+{% endblock %}

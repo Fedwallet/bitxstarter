@@ -12,6 +12,7 @@ var validator = require('validator');
 
 var models = require('../models')();
 var User = models.User;
+var Project = models.Project;
 
 /**
  *  Helpers
@@ -103,6 +104,11 @@ exports.profile = function *(next) {
       // tabs: backed created activity
       var tab = this.query.tab || 'backed';
       var currentUser = this.locals.currentUser;
+      var created = yield Project.getCreatedCount(user.id);
+
+      user.backed_count = 0
+      user.created_count = ~~created.count;
+      user.activity_count = 0
 
       yield this.render('users/profile', {
         tab: tab.toLowerCase(),
