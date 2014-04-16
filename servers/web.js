@@ -28,14 +28,14 @@ app.use(middles.staticCache(path.join(__dirname, '..', 'public'), {
 }));
 
 app.keys = ['keys', 'keykeys'];
-app.name = 'bitstarter';
+app.name = 'bitxstarter';
 app.outputErrors = true;
 //app.proxy = true;
 
 middles.locals(app, {
   site: {
-    title: 'BitAppStore',
-    name: 'Bitstarter'
+    title: 'BitXStarter',
+    name: 'BitXStarter'
   }
 });
 

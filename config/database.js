@@ -1,7 +1,7 @@
 var lazy = require('lazy.js');
 
 var _default = {
-  database  : 'bitappstore_dev',
+  database  : 'bitxstarter_dev',
   username  : 'walle',
   password  : 'eve',
 
@@ -26,10 +26,10 @@ module.exports = {
   development: _default,
 
   test: lazy(_default).merge({
-    database: 'bitappstore_test'
+    database: 'bitxstarter_test'
   }).toObject(),
 
   production: lazy(_default).merge({
-    database: 'bitappstore_prod'
+    database: 'bitxstarter_prod'
   }).toObject()
 };

@@ -23,7 +23,7 @@ var config = Object.freeze({
 
   postgre       : postgre,
   session       : session,
-  sessionSecret : 'bitappstore test session secret',
+  sessionSecret : 'bitxstarter test session secret',
 
   // https://www.owasp.org/index.php/Password_Storage_Cheat_Sheet
   pbkdf2    : {

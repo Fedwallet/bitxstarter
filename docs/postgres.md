@@ -12,7 +12,7 @@ createuser -P walle
 ### Create Database
 
 ```
-createdb -O walle bitappstore_dev
+createdb -O walle bitxstarter_dev
 # password: eve
 ```
 

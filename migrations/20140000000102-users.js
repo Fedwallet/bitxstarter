@@ -16,7 +16,7 @@ module.exports = {
           .build({
             id: -1,
             username: 'system',
-            email:  'system@bitappstore.com',
+            email:  'system@bitxstarter.com',
             admin: true,
             active: true,
             name: 'system'
