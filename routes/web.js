@@ -8,6 +8,7 @@ var site = r('site');
 var sessions = r('sessions');
 var users = r('users');
 var projects = r('projects');
+var settings = r('settings');
 
 /**
  *  Expose `routes`.
@@ -41,6 +42,11 @@ function routes(app) {
   app.get('/signup', users.new);
   app.post('/signup', users.create);
   app.get('/@:username', users.profile);
+
+  app.get('/settings/profile', settings.profile);
+  app.get('/settings/account', settings.account);
+  app.get('/settings/password', settings.password);
+  app.get('/settings/notifications', settings.notifications);
 
   app.get('/discover', projects.index);
   app.get('/start', projects.start);
