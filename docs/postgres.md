@@ -16,6 +16,13 @@ createdb -O walle bitxstarter_dev
 # password: eve
 ```
 
+### Rename Database
+
+```
+psql postgres
+postgres=# ALTER DATABASE foo RENAME TO bar;
+```
+
 ### Enable extension
 
 ```
