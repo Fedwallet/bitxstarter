@@ -1,4 +1,3 @@
-
 'use strict';
 
 /**
@@ -11,12 +10,10 @@ var users = r('users');
 var projects = r('projects');
 
 /**
- *  Helpers
+ *  Expose `routes`.
  */
 
-function r(ctrler) {
-  return require('../controllers/' + ctrler);
-}
+module.exports = routes;
 
 function routes(app) {
 
@@ -51,8 +48,6 @@ function routes(app) {
   app.post('/projects/new', projects.create);
 }
 
-module.exports = routes;
-
 function *authenticate(next) {
   /*jshint validthis:true */
   if (this.session.loggedIn) {
@@ -60,4 +55,12 @@ function *authenticate(next) {
   }
   var path = this.path;
   this.redirect('/signin' + (path ? '?return_to=' + path : ''));
+}
+
+/**
+ *  Helpers
+ */
+
+function r(ctrler) {
+  return require('../controllers/' + ctrler);
 }
