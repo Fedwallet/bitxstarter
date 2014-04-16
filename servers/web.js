@@ -30,7 +30,7 @@ app.use(middles.staticCache(path.join(__dirname, '..', 'public'), {
 app.keys = ['keys', 'keykeys'];
 app.name = 'bitstarter';
 app.outputErrors = true;
-app.proxy = true;
+//app.proxy = true;
 
 middles.locals(app, {
   site: {
@@ -84,7 +84,7 @@ middles.render(app, {
 app.use(middles.router(app));
 routes(app);
 
-// @todo: storing logs
+// TODO: storing logs
 app.on('error', function(err, ctx){
   console.log('server error', err, ctx);
 });
