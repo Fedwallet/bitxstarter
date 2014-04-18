@@ -26,7 +26,6 @@
   - ^[a-zA-Z0-9_]{1,15}$
   - maxleng: 15
 
-
 #### Facebook
 
 * username pattern: ^[a-z0-9.]{5,}$

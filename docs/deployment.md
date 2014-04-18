@@ -58,7 +58,9 @@ cat ~/.ssh/id_rsa.pub | ssh xxx.com "sudo sshcommand acl-add dokku [username]"
 SERVER
 ```
 cd /var/lib/dokku/plugins
+git clone https://github.com/wmluke/dokku-domains-plugin domains
 git clone https://github.com/Kloadut/dokku-pg-plugin.git postgresql
+git clone https://github.com/luxifer/dokku-redis-plugin.git redis
 dokku plugins-install
 ```
 
