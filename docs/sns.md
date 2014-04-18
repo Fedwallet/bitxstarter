@@ -4,7 +4,7 @@
 
 ### Username
 
-#### Bitappstore
+#### BitXStarter
 
 * username pattern:
   - 不支持下划线
@@ -38,7 +38,7 @@
 
 ### Avatar
 
-#### Bitappstore
+#### BitXStarter
 
 * avatar_url: custom avatar
 * gravatar_id: email md5 hash
