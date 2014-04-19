@@ -12,7 +12,7 @@
   "dependencies": {
     "debug": "^0.7.4",
     "delegates": "0.0.3",
-    "koa": "^0.5.2",
+    "koa": "^0.5.5",
     "koa-bodyparser": "^0.1.0",
     "koa-cure": "0.0.3",
     "koa-favicon": "^1.0.1",
