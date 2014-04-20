@@ -59,7 +59,7 @@ SERVER
 ```
 cd /var/lib/dokku/plugins
 git clone https://github.com/wmluke/dokku-domains-plugin domains
-git clone https://github.com/Kloadut/dokku-pg-plugin.git postgresql
+git clone https://github.com/jeffutter/dokku-postgresql-plugin
 git clone https://github.com/luxifer/dokku-redis-plugin.git redis
 dokku plugins-install
 ```
@@ -69,6 +69,7 @@ dokku plugins-install
 * [plugins wiki](https://github.com/progrium/dokku/wiki/Plugins)
 * [domains](https://github.com/wmluke/dokku-domains-plugin)
 * [postgresql](https://github.com/Kloadut/dokku-pg-plugin)
+* [postgresql signle](https://github.com/Kloadut/dokku-pg-plugin.git)
 * [redis](https://github.com/luxifer/dokku-redis-plugin)
 
 
@@ -87,6 +88,12 @@ CLIENT
 cd node-js-sample
 git remote add [name] dokku@xxx.com:node-js-app
 git push [name] master
+```
+
+SERVER
+```
+# List all env variables
+dokku config node-js-app
 ```
 
 
