@@ -6,20 +6,19 @@ VAGRANT_BOX_URL = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-
 BOX_NAME    = ENV["BOX_NAME"] || "trusty"
 BOX_URI     = ENV["BOX_URI"] || "$VAGRANT_BOX_URL"
 BOX_MEMORY  = ENV["BOX_MEMORY"] || "1024"
-# bitxstarter
-BXS_DOMAIN  = ENV["BXS_DOMAIN"] || "bitxstarter.com"
-BXS_IP      = ENV["BXS_IP"] || "10.0.0.2"
+DOCKER_DOMAIN  = ENV["BXS_DOMAIN"] || "docker.me"
+DOCKER_IP      = ENV["BXS_IP"] || "10.0.0.2"
 
 Vagrant.configure("2") do |config|
   config.vm.box = BOX_NAME
   config.vm.box_url = BOX_URI
-  config.vm.synced_folder File.dirname(__FILE__), "/root/bitxstarter"
+  config.vm.synced_folder File.dirname(__FILE__), "/vagrant"
   config.vm.network :forwarded_port, guest: 80, host: 8080
-  config.vm.hostname = "#{BXS_DOMAIN}"
-  config.vm.network :private_network, ip: BXS_IP
+  config.vm.hostname = "#{DOCKER_DOMAIN}"
+  config.vm.network :private_network, ip: DOCKER_IP
 
   config.vm.provider :virtualbox do |v|
-    v.name = "bitappstore.docker"
+    v.name = DOCKER_DOMAIN
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     v.customize ["modifyvm", :id, "--memory", BOX_MEMORY]
   end
