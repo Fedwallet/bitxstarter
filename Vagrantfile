@@ -1,6 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
+COREOS_BOX_URL = "http://storage.core-os.net/coreos/amd64-generic/dev-channel/coreos_production_vagrant.box"
 VAGRANT_BOX_URL = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
 
 BOX_NAME    = ENV["BOX_NAME"] || "trusty"
@@ -9,22 +10,22 @@ BOX_MEMORY  = ENV["BOX_MEMORY"] || "1024"
 DOCKER_DOMAIN  = ENV["BXS_DOMAIN"] || "docker.me"
 DOCKER_IP      = ENV["BXS_IP"] || "10.0.0.2"
 
+CURRENT_DIR = File.dirname(__FILE__)
+PROJECT_NAME = File.split(File.realpath(CURRENT_DIR))[1] || ""
+
 Vagrant.configure("2") do |config|
   config.vm.box = BOX_NAME
   config.vm.box_url = BOX_URI
-  config.vm.synced_folder File.dirname(__FILE__), "/vagrant"
-  config.vm.network :forwarded_port, guest: 80, host: 8080
-  config.vm.hostname = "#{DOCKER_DOMAIN}"
+  config.vm.synced_folder CURRENT_DIR, "/home/vagrant/#{PROJECT_NAME}"
+  config.vm.hostname = DOCKER_DOMAIN
   config.vm.network :private_network, ip: DOCKER_IP
+  config.vm.network :forwarded_port, guest: 80, host: 8080
 
   config.vm.provider :virtualbox do |v|
     v.name = DOCKER_DOMAIN
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
     v.customize ["modifyvm", :id, "--memory", BOX_MEMORY]
   end
-
-$source = <<EOF
-EOF
 
 $init = <<EOFE
 echo "Installing Dokku & Docker..."
@@ -49,4 +50,9 @@ sudo apt-get autoclean
 EOFE
 
   config.vm.provision :shell, :inline => $init, :privileged => false
+end
+
+# plugin conflict
+if Vagrant.has_plugin?("vagrant-vbguest") then
+    config.vbguest.auto_update = false
 end
