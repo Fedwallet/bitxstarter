@@ -103,10 +103,10 @@ db
   });
 
 if (!module.parent) {
-  //require('pretty-error').start(function() {
+  require('pretty-error').start(function() {
     app.listen(config.port);
     console.log('127.0.0.1:' + config.port);
-  //});
+  });
 }
 
 module.exports = app;
