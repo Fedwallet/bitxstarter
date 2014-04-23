@@ -59,7 +59,7 @@ app.use(function *loggedIn(next) {
 app.use(middles.flash(app));
 app.use(middles.i18n(app, {
   directory: rootdir + '/config/locales',
-  locales: ['zh-CN', 'en']
+  locales: ['zh-cn', 'en']
 }));
 
 app.use(middles.notFound);
@@ -91,13 +91,6 @@ app.on('error', function(err, ctx){
 
 app = http.createServer(app.callback());
 
-if (!module.parent) {
-  require('pretty-error').start(function() {
-    app.listen(config.port);
-    console.log('127.0.0.1:' + config.port);
-  });
-}
-
 db
   .sequelize
   .sync({ force: false })
@@ -108,5 +101,12 @@ db
       console.log('Postgres connected.');
     }
   });
+
+if (!module.parent) {
+  //require('pretty-error').start(function() {
+    app.listen(config.port);
+    console.log('127.0.0.1:' + config.port);
+  //});
+}
 
 module.exports = app;
