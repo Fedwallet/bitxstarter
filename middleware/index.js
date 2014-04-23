@@ -12,6 +12,6 @@ module.exports = {
   methodOverride  : require('koa-methodoverride'),
   flash           : require('koa-flash'),
   auth            : require('./auth'),
-  notFound        : require('./notfound'),
-  i18n            : require('koa-i18n')
+  i18n            : require('./i18n'),
+  notFound        : require('./notfound')
 };

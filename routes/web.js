@@ -55,7 +55,7 @@ function routes(app) {
 }
 
 function *authenticate(next) {
-  /*jshint validthis:true */
+  /* jshint validthis:true */
   if (this.session.loggedIn) {
     return yield next;
   }
