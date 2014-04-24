@@ -37,10 +37,10 @@ var md5         = require('../lib/utils').md5;
 var pbkdf2      = require('pbkdf2');
 var pbkdf2Conf  = require('../config').pbkdf2;
 
-var SALTLEN     = pbkdf2Conf.saltlen    || pbkdf2.saltlen;
-var KEYLEN      = pbkdf2Conf.keylen     || pbkdf2.keylen;
-var ALGORITHM   = pbkdf2Conf.algorithm  || pbkdf2.algorithm;
-var ITERATIONS  = pbkdf2Conf.iterations || pbkdf2.iterations;
+var SALTLEN     = pbkdf2Conf.saltlen;
+var KEYLEN      = pbkdf2Conf.keylen;
+var ALGORITHM   = pbkdf2Conf.algorithm;
+var ITERATIONS  = pbkdf2Conf.iterations;
 
 module.exports = function (sequelize, DataTypes) {
 
