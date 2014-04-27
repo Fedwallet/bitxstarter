@@ -7,7 +7,7 @@ VAGRANT_BOX_URL = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-
 BOX_NAME    = ENV["BOX_NAME"] || "trusty"
 BOX_URI     = ENV["BOX_URI"] || "$VAGRANT_BOX_URL"
 BOX_MEMORY  = ENV["BOX_MEMORY"] || "1024"
-DOCKER_DOMAIN  = ENV["BXS_DOMAIN"] || "docker.me"
+DOCKER_DOMAIN  = ENV["BXS_DOMAIN"] || "docker.dev"
 DOCKER_IP      = ENV["BXS_IP"] || "10.0.0.2"
 
 CURRENT_DIR = File.dirname(__FILE__)
@@ -19,12 +19,19 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder CURRENT_DIR, "/home/vagrant/#{PROJECT_NAME}"
   config.vm.hostname = DOCKER_DOMAIN
   config.vm.network :private_network, ip: DOCKER_IP
-  config.vm.network :forwarded_port, guest: 80, host: 8080
+  config.vm.network :forwarded_port, guest: 88, host: 8080
+  config.vm.network :forwarded_port, guest: 4243, host: 4243
 
   config.vm.provider :virtualbox do |v|
     v.name = DOCKER_DOMAIN
     v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    v.customize ["modifyvm", :id, "--natdnsproxy1", "on"]
     v.customize ["modifyvm", :id, "--memory", BOX_MEMORY]
+  end
+
+  # plugin conflict
+  if Vagrant.has_plugin?("vagrant-vbguest")
+      config.vbguest.auto_update = false
   end
 
 $init = <<EOFE
@@ -50,9 +57,6 @@ sudo apt-get autoclean
 EOFE
 
   config.vm.provision :shell, :inline => $init, :privileged => false
-end
 
-# plugin conflict
-if Vagrant.has_plugin?("vagrant-vbguest") then
-    config.vbguest.auto_update = false
+  config.vm.provision :docker
 end
