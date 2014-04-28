@@ -4,8 +4,8 @@ MAINTAINER Fangdun Cai "<cfddream@gmail.com>" @fundon
 ENV DEBIAN_FRONTEND noninteractive
 RUN locale-gen en_US.UTF-8
 
-RUN apt-get update -q && \
-    apt-get install -qy \
+RUN apt-get update -q &&\
+    apt-get install -qy\
       python-dev \
       g++ \
       make \
