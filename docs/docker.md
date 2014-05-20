@@ -11,6 +11,10 @@ apt-get install -q -y --force-yes lxc-docker
 usermod -a -G docker vagrant
 docker version
 su - vagrant -c 'echo alias d=docker >> ~/.bash_aliases'
+echo export DOCKER_OPTS=\"-H 127.0.0.1:4243\" | sudo tee -a /etc/default/docker
+echo export DOCKER_HOST=127.0.0.1:4243 >> ~/.bashrc
+sudo stop docker
+sudo start docker
 ```
 
 
@@ -37,7 +41,49 @@ docker build -t <name>:<version> --rm image       # build image from Dockerfile
 docker tag <name>:<version> <name>:latest         # tag latest
 docker push <name>                                # release
 git tag <version> && git push origin <version>    # create a git tag
+
+# Volumes           Host        : Contaier
+docker run -i -t -v /home/vagrant:/var/www 03476d /bin/bash
+
+# Run a container
+#           host:container
+docker run -p 80:80 -d <name>:<version>
+
+# Remove <none:none> images
+docker rmi $(docker images | grep "^<none>" | awk "{print $3}")
+
+# Remove temporary built images
+docker images --no-trunc| grep none | awk '{print $3}' | xargs -r docker rmi
+
+# Remove Docker containers with Exit status
+docker ps -a --no-trunc | grep 'Exit' | awk '{print $1}' | xargs -r docker rm
+
+# Remove all stopped containers.
+docker rm $(docker ps -a -q)
 ```
+
+
+### Docker Server
+
+Docker VM Box
+```
+# Manual
+/usr/bin/docker -d -H unix:///var/run/docker.sock -H tcp://0.0.0.0:4243 > /var/lib/docker/docker.log 2>&1 &
+
+# Or edit `/etc/default/docker`
+echo 'DOCKER_OPTS=" -H unix:///var/run/docker.sock -H tcp://0.0.0.0:4243"' >> /etc/default/docker
+
+# Then
+docker info
+```
+
+Host
+```
+export DOCKER_HOST="tcp://127.0.0.1:4243"
+docker info
+docker login
+```
+
 
 
 ### Dockerfile

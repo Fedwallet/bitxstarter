@@ -1,6 +1,6 @@
 # BitXstarter.
 
-暂时用bitxstarter，bitxstarter.com 还没注册
+暂时用bitxstarter
 
 ### Technology Stack
 
