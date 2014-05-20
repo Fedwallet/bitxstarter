@@ -5,7 +5,7 @@ ENV DEBIAN_FRONTEND noninteractive
 RUN locale-gen en_US.UTF-8
 
 RUN apt-get update -q &&\
-    apt-get install -qy\
+    apt-get install -qqy\
       python-dev \
       g++ \
       make \

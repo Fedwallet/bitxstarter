@@ -1,19 +1,18 @@
 FROM fundon/node:koa
 MAINTAINER Fangdun Cai "<cfddream@gmail.com>" @fundon
 
+USER root
 ENV DEBIAN_FRONTEND noninteractive
 RUN locale-gen en_US.UTF-8
 
-USER root
-RUN apt-get install -qy \
+RUN apt-get update -q &&\
+    apt-get install -qqy --yes --force-yes zip wget ca-certificates build-essential &&\
+    apt-get install -qqy \
       vim
 
 USER worker
-RUN mkdir bitxstarter
-WORKDIR bitxstarter
-VOLUME ["/home/worker/bitxstarter"]
-ENV BITXSTARTER_DIR /home/worker/bitxstarter
+#VOLUME ["/home/worker/bitxstarter"]
+ENV BITXSTARTER /home/worker/bitxstarter
+#WORKDIR /bitxstarter
 
-EXPOSE 2333
-
-CMD 
+#CMD ["/bin/bash"]
